@@ -65,13 +65,13 @@ if __name__ == '__main__':
                             input_variables=["text"])
     
     # load the summarize chain with map_reduce type
-    chain = load_summarize_chain(llm, chain_type="stuff", prompt=BULLET_POINT_PROMPT)
+    chain = load_summarize_chain(llm, chain_type="refine")
 
     # Run the chain
     output_summary = chain.run(docs)
     
     # Get the output in wrapped form
-    wrapped_text = textwrap.fill(output_summary, width=100, break_long_words=False, replace_whitespace=False)
+    wrapped_text = textwrap.fill(output_summary, width=100)
     print(wrapped_text)
 
 
