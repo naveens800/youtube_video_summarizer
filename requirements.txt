@@ -1,0 +1,9 @@
+# Ubuntu: system level package
+#sudo apt install ffmpeg
+
+langchain==0.1.4
+deeplake
+openai==1.10.0
+tiktoken
+yt_dlp==2023.6.21
+openai-whisper==20230314
