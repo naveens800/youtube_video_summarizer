@@ -53,13 +53,25 @@ if __name__ == '__main__':
     texts = text_splitter.split_text(text)
     docs = [Document(page_content=t) for t in texts[:4]]
     
+    prompt_template = """Write a concise bullet point summary of the following:
+
+
+    {text}
+
+
+    CONSCISE SUMMARY IN BULLET POINTS:"""
+
+    BULLET_POINT_PROMPT = PromptTemplate(template=prompt_template, 
+                            input_variables=["text"])
+    
     # load the summarize chain with map_reduce type
-    chain = load_summarize_chain(llm, chain_type="map_reduce")
+    chain = load_summarize_chain(llm, chain_type="stuff", prompt=BULLET_POINT_PROMPT)
 
     # Run the chain
     output_summary = chain.run(docs)
     
     # Get the output in wrapped form
-    wrapped_text = textwrap.fill(output_summary, width=100)
+    wrapped_text = textwrap.fill(output_summary, width=100, break_long_words=False, replace_whitespace=False)
+    print(wrapped_text)
 
 
